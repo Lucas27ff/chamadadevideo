@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chamada de Vídeo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: url('https://mentoradosdowl.wordpress.com/wp-content/uploads/2025/06/mood-dark-whatsapp.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid white;
+      object-fit: cover;
+      animation: pulse 2s infinite;
+    }
+
+    .user-name {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .calling-text {
+      font-size: 16px;
+      color: #ccc;
+      margin-top: 6px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: shake 1.5s infinite;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .btn svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    .accept {
+      background-color: #4CAF50;
+    }
+
+    .decline {
+      background-color: #f44336;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-4px); }
+      50% { transform: translateY(4px); }
+      75% { transform: translateY(-2px); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+      70% { box-shadow: 0 0 0 30px rgba(255,255,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img class="profile-img" src="https://mentoradosdowl.wordpress.com/wp-content/uploads/2025/05/valescagalega-20250523-0001.jpg" alt="Usuário" />
+    <div class="user-name">Juliana</div>
+    <div class="calling-text">Chamada de vídeo recebida...</div>
+
+    <div class="buttons">
+      <!-- Recusar à esquerda, Atender à direita -->
+      <div class="btn decline" id="btnRecusar">
+        <svg viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.7 11.7 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17.9 17.9 0 013 6a1 1 0 011-1h3.5a1 1 0 011 1 11.7 11.7 0 00.59 3.68 1 1 0 01-.21 1.11l-2.26 2z"/>
+        </svg>
+      </div>
+      <div class="btn accept" id="btnAtender">
+        <svg viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.7 11.7 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17.9 17.9 0 013 6a1 1 0 011-1h3.5a1 1 0 011 1 11.7 11.7 0 00.59 3.68 1 1 0 01-.21 1.11l-2.26 2z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <audio id="ringtone" loop>
+    <source src="https://lucas27ff.github.io/chamada-de-video/toque.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const ringtone = document.getElementById('ringtone');
+    const btnAtender = document.getElementById('btnAtender');
+    const btnRecusar = document.getElementById('btnRecusar');
+
+    // Autoplay após clique
+    document.addEventListener('click', () => {
+      if (ringtone.paused) {
+        ringtone.play().catch(err => console.warn("Erro ao tocar áudio:", err));
+      }
+    }, { once: true });
+
+    btnAtender.addEventListener('click', () => {
+      ringtone.pause();
+      window.location.href = "chamada.html";
+    });
+
+    btnRecusar.addEventListener('click', () => {
+      ringtone.pause();
+      alert("Chamada recusada");
+    });
+  </script>
+</body>
+</html>
